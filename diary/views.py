@@ -69,11 +69,11 @@ def create(request):
        obj3.entry_date = the_date
        obj3.save()
  
-       return HttpResponseRedirect('/diary/create', {'full_name' : request.user.username})
+       return HttpResponseRedirect('/foody/create', {'full_name' : request.user.username})
        
       else:
         the_error = 'There was a problem with your diary entry details, please re-enter details'
-        return HttpResponseRedirect('/diary/create', {'full_name' : request.user.username, 'the_error':the_error})
+        return HttpResponseRedirect('/foody/create', {'full_name' : request.user.username, 'the_error':the_error})
     else:
      
      cforms3 = FourthDiaryForm(instance=Diary_entry())
@@ -113,49 +113,49 @@ def auth_view(request):
 	
     if user is not None:
      auth.login(request, user)
-     return HttpResponseRedirect('/diary/create')
+     return HttpResponseRedirect('/foody/create')
     else:
      return HttpResponseRedirect('/accounts/invalid')
 	 
 def loggedin(request):
-    return render_to_response('diary/loggedin.html', {'full_name' : request.user.username})
+    return render_to_response('foody/loggedin.html', {'full_name' : request.user.username})
 
 def invalid_login(request):
     return render_to_response('invalid_login.html')
 	
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/diary/accounts/login/')
+    return HttpResponseRedirect('/foody/accounts/login/')
 
 def login(request):
     if request.method == 'POST':
      form = UserCreationForm(request.POST)
      if form.is_valid():
       form.save()
-      return HttpResponseRedirect('/diary/accounts/register_success')
+      return HttpResponseRedirect('/foody/accounts/register_success')
     args = {}
 
     args.update(csrf(request))
 
     args['form'] = UserCreationForm()
     print args
-    return render_to_response('diary/login.html', args, context_instance = RequestContext(request))
+    return render_to_response('foody/login.html', args, context_instance = RequestContext(request))
 	
 def gallery(request):
 #
     image_list = Diary_entry.objects.raw('SELECT id, image FROM diary_diary_entry WHERE image <>  "" AND user_id = %s LIMIT 0 , 20' , [ request.user.id] )
-    return render_to_response('diary/gallery.html',{'full_name' : request.user.username, 'image_list':image_list } ,context_instance = RequestContext(request))
+    return render_to_response('foody/gallery.html',{'full_name' : request.user.username, 'image_list':image_list } ,context_instance = RequestContext(request))
 	
 def history(request):
 #
     q1 = Diary_entry.objects.all().order_by('-entry_date')
     full_list = q1.filter(user=request.user)
     #full_list = Diary_entry.objects.raw('SELECT id, image FROM diary_diary_entry WHERE image <>  "" AND user_id = %s LIMIT 0 , 20' , [ request.user.id] )
-    return render_to_response('diary/history.html',{'full_name' : request.user.username, 'full_list':full_list } ,context_instance = RequestContext(request))
+    return render_to_response('foody/history.html',{'full_name' : request.user.username, 'full_list':full_list } ,context_instance = RequestContext(request))
 	
 class DetailView(generic.DetailView):
     model = Diary_entry
-    template_name = 'diary/deatil.html'
+    template_name = 'foody/deatil.html'
 	
 def register_success(request):
-    return render_to_response('diary/register_success.html')
+    return render_to_response('foody/register_success.html')
