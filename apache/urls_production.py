@@ -1,38 +1,26 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, url
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
-
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
+from diary import views
+#diary_entry_id
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^checkin/$', 'cargoapp.views.checkin'),
-    url(r'^calls/$', 'cargoapp.views.calls'),
-    url(r'^registration/$', 'cargoapp.views.registration'),
-    url(r'^index/$', 'cargoapp.views.index'),
-    url(r'^setup/$', 'cargoapp.views.setup'),
-	url(r'^report_call_status/$', 'cargoapp.views.report_call_status'),
-    url(r'^$', 'cargoapp.views.index'),
-    url(r'^register_user_post/$','cargoapp.views.register_user_post'),
-    url(r'^players/$','cargoapp.views.view_players'),
-    url(r'^locations/$','cargoapp.views.view_locations'),
-    url(r'^heartbeat/$','cargoapp.views.process_heartbeat'),
-    url(r'^gui/$','cargoapp.views.get_all_status'),
-    url(r'^logout/$','cargoapp.views.logout_view'),
-    url(r'^get_score/$','cargoapp.views.get_score'),
-    url(r'^receive_SMS/$','cargoapp.views.receive_SMS'),
-    url(r'^receive_PIN/$','cargoapp.views.receive_PIN'),
-    url(r'^game/$','cargoapp.views.set_up_game'),
-    # url(r'^cargoapp/', include('cargoapp.foo.urls')),
-
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-     url(r'^admin/', include(admin.site.urls)),
+    # ex: /polls/
+    url(r'^$', views.index, name='index'),
+    # ex: /polls/5//diary/gallery
+    url(r'^(?P<diary_entry_id>\d+)/$', views.detail, name='detail'),
+    # ex: /polls/5/results/
+    url(r'^(?P<diary_entry_id>\d+)/results/$', views.results, name='results'),
+    # ex: /polls/5/vote/
+    url(r'^(?P<diary_entry_id>\d+)/enter/$', views.enter, name='enter'),
+    url(r'^gallery/$', views.gallery, name='gallery'),
+    url(r'^history/$', views.history, name='history'),
+    url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name='detailview'),
+    url(r'^create/$', views.create, name='create'),
+    url(r'^accounts/login/$', views.login, name='login'),
+    url(r'^accounts/login/auth_view/$', views.auth_view, name='auth_view'),
+    url(r'^accounts/logout/$', views.logout, name='logout'),
+    url(r'^accounts/loggedin/$', views.loggedin, name='loggedin'),
+    url(r'^accounts/invalid/$', views.invalid_login, name='invalid_login'),
+    #url(r'^accounts/register/$', views.register_user, name='register_user'),
+    url(r'^accounts/register_success/$', views.register_success, name='register_success'),
 )
