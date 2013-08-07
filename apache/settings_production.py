@@ -6,7 +6,7 @@ TEMPLATE_DEBUG = True
 ROOT_PATH = os.path.dirname(__file__)
 
 ADMINS = (
-     ('kqb', 'K.Bachour@nottingham.ac.uk'),      
+     ('nuwan', 'itxnbka@nottingham.ac.uk'),      
      ('jef', 'jef@cs.nott.ac.uk'),
 
 )
@@ -15,10 +15,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/var/www/cargo/cargo/db/sqlite.db',                       # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'food_diary_db',                       # Or path to database file if using sqlite3.
+        'USER': 'food_diary',                      # Not used with sqlite3.
+        'PASSWORD': 'f00d5',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -60,7 +60,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/home/joel/cargo/static/'
+STATIC_ROOT = '/home/jef/foody/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -104,16 +104,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'cargo.apache.urls_production'
+ROOT_URLCONF = 'diary.apache.urls_production'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/var/www/cargo/cargo/cargoapp/templates',
-    '/usr/local/lib/python2.6/dist-packages/django/contrib/admin/templates',
-    '/var/www/cargo/cargo/cargoapp/templates/cargoapp',
-    '/var/www/cargo/cargo/cargoapp/templates/admin',
+    '/var/www/foody/food_diary/diary/templates',
+    '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/templates',
+    '/var/www/foody/food_diary/diary/templates/diary',
+    #'/var/www/foody/food_diary/diary/templates/admin',
 )
 
 INSTALLED_APPS = (
@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cargo.cargoapp',
+    'diary',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

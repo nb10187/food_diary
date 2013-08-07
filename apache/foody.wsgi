@@ -6,7 +6,7 @@ project = os.path.dirname(apache_configuration)
 workspace = os.path.dirname(project)
 sys.path.append(workspace) 
 sys.path.append(project)
-path = '/var/www/cargo/cargo'
+path = '/var/www/foody/food_diary'
 if path not in sys.path:
     sys.path.append(path)
 
