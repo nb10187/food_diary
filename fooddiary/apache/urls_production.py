@@ -1,4 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, include, url 
+
+from django.contrib import admin
+admin.autodiscover()
 
 from diary import views
 #diary_entry_id
@@ -23,4 +26,6 @@ urlpatterns = patterns('',
     url(r'^accounts/invalid/$', views.invalid_login, name='invalid_login'),
     #url(r'^accounts/register/$', views.register_user, name='register_user'),
     url(r'^accounts/register_success/$', views.register_success, name='register_success'),
+    
+    url(r'^admin/', include(admin.site.urls)),
 )
