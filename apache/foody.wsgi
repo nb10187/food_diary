@@ -10,7 +10,7 @@ path = '/var/www/foody/food_diary'
 if path not in sys.path:
     sys.path.append(path)
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'diary.apache.settings_production'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'fooddiary.apache.settings_production'
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
 
