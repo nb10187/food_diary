@@ -1,0 +1,90 @@
+
+	<div class="row" >
+				<div class="span3.5" hidden="hidden" >
+					<div class="well" >
+
+
+                        <h5> Make new Diary Entry  (Day Entry)</h5>
+</br>
+
+
+                        <form action="" method="post">{% csrf_token %}
+    Date:                        
+<div class="input-append date" id="dp3" data-date="2013-08-03" data-date-format="yyyy-mm-dd">
+
+    <input id="the_date"  class="span2" size="16"  name="the_date" type="text" value="2013-08-03"  />
+  <span class="add-on"><i class="icon-th"></i></span></div>                          
+
+
+
+
+
+
+
+                        
+                        <div class="accordion" id="myaccordion">
+                            
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">
+                                        Breakfast
+                                    </a>
+                                </div>
+                                
+                                <div id="first" class="accordion-body collapse in">
+                                    <div class="accordion-inner">
+                                                                        {{poll_form.as_p}}
+
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#second">
+                                        Lunch
+                                    </a>
+                                </div>
+                                
+                                <div id="second" class="accordion-body collapse">
+                                    <div class="accordion-inner">
+                                        {{choice_forms.as_p}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#third">
+                                        Dinner
+                                    </a>
+                                </div>
+                                
+                                <div id="third" class="accordion-body collapse">
+                                    <div class="accordion-inner">
+                                            {{choice_forms2.as_p}}
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <p align="right">
+
+                    <input type="submit" class="btn btn-primary" name ="submit" value = "submit"></p>
+</form>
+
+
+</div></div></div>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link href="{{STATIC_URL}}css/datapicker.css" rel="stylesheet" media="screen">
+
+<link href="{{STATIC_URL}}css/bootstrap-fileupload.min.css" rel="stylesheet" media="screen">
+
+<script>
+function validateForm()
+{
+var x=document.forms["myForm"]["3-meal_type"].value;
+var x2=document.forms["myForm"]["food_type"].value;
+var x3=document.forms["myForm"]["serving_size"].value;
+
+
+is_error=false;
+mesg ="";
+
+if (x==null || x=="")
+  {
+  mesg = mesg  + "Type Of Meal Must Be Selected \n";
+  is_error=true;
+ 
+  }
+
+
+if (x2==null || x2=="")
+  {
+  mesg = mesg  + "Food Type Must Be Selected \n";
+  is_error=true;
+ 
+  }
+
+if (x3==null || x3=="")
+  {
+  mesg = mesg  + "Serving size Must Be Selected \n";
+  is_error=true;
+ 
+  }
+
+if (is_error==true)
+  {
+  alert(mesg );
+  return false;
+  }
+}
+</script>
+  </head>
+  <body>
+   <div class="container">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script src="{{STATIC_URL}}js/highcharts.js"></script>
+<script src="{{STATIC_URL}}js/modules/data.js"></script>
+<script src="{{STATIC_URL}}js/modules/exporting.js"></script>
+
+   	<!-- start of header****************************************************************************-->
+
+			<header class="row">
+
+				<div class="span12"> 
+					<nav class="navbar">
+						<div class="navbar-inner"> 
+
+							<a href="#" class="brand"> Food Diary App</a>
+							<a class="btn  btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</a>
+							<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li  class="divider-vertical"> </li>
+								
+
+
+
+								<li  class="dropdown"> 
+
+									 <a href="#" class="dropdown-toggle" data-toggle="dropdown">  <b> Hello {{ full_name }}! </b>
+									 	<b class="caret"></b>
+									 </a>
+									 <ul class="dropdown-menu">
+										<li> <a href="#"> </a></li>
+										 
+										<li  class="divider"> </li>
+
+										<li> <a href="/diary/accounts/logout/">Log Out</a></li>
+
+									 </ul>
+								</li>
+
+
+
+
+
+
+								<li  class="divider-vertical"> </li>
+								<li> <a href="/diary/create">Home</a></li>
+								<li  class="divider-vertical"> </li>
+							 
+							 
+                                <li> <a href="/diary/history">Complete History</a></li>
+								<li  class="divider-vertical"> </li>
+
+
+
+							</ul>
+						</div>
+
+						</div>
+
+					</nav>
+
+				</div>
+
+			</header>
+			<!-- end of header****************************************************************************-->
+
+			<div class="row" id="main-content">
+				<div class="span3.5" id="sidebar">
+					<div class="well" >
+
+							{{ the_error }}
+                                                
+</br>
+
+
+
+
+
+                        
+                        <div class="accordion" id="myaccordion2">
+                            
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#myaccordion2" href="#secondfirst">
+                                          Make new Diary Entry                                        </a>
+                                </div>
+                                
+                                <div id="secondfirst" class="accordion-body collapse in">
+                                    <div class="accordion-inner">
+                                                                 
+<form action="" method="post"  name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data"> {% csrf_token %}
+
+
+<p><label for="id_3-date">Date :</label> 
+
+
+<div class="input-append date" id="dp4" data-date="2013-08-03" data-date-format="yyyy-mm-dd">
+
+    <input id="the_date2"  class="span2" size="16"  name="the_date2" type="text" value="2013-08-03"  />
+
+      <span class="add-on"><i class="icon-th"></i></span></div></p>                          
+
+
+
+<p><label for="id_3-meal_type">Meal type:</label> <select id="id_3-meal_type" name="3-meal_type">
+<option value="" selected="selected">---------</option>
+<option value="Breakfast">Breakfast</option>
+<option value="Lunch">Lunch</option>
+<option value="Dinner">Dinner</option>
+<option value="Snack or Other">Snack/Other</option>
+</select></p>
+
+{{choice_forms3.as_p}}
+
+
+                                    
+<p><label for="id_additional_info">Additional info:</label> <input id="id_additional_info" maxlength="200" name="additional_info" type="text" /></p>
+
+                                
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <span class="btn btn-file"><span class="fileupload-new">Select Image</span><span class="fileupload-exists">Change</span><input type="file"  id="id_image" name="image"  /></span>
+  <span class="fileupload-preview"></span>
+  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+</div> </div></div>   </div></br>
+
+                         <p align="right">
+                            <input type="submit" class="btn btn-primary" name ="Submit" value = "submit"></p> 
+
+
+</form>
+                    
+</div>					
+
+
+
+
+					</div>
+
+                </div>
+
+<div class="span8">
+
+ <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#red" data-toggle="tab">Home</a></li>
+        <li><a href="#orange" data-toggle="tab">My Feedback</a></li>
+         <li><a href="#purple" data-toggle="tab">Food Gallery</a></li>
+        <li><a href="#yellow" data-toggle="tab">My Food Emmisions</a></li>
+        <li><a href="#green" data-toggle="tab">User comparison</a></li>
+        <li><a href="#blue" data-toggle="tab">History Graph</a></li>
+
+    </ul>
+    <div id="my-tab-content" class="tab-content">
+        <div class="tab-pane active" id="red">
+        <div align="center"> 
+            
+<table  border="0" style="width: 99%" >
+  <tr><td colspan="2">
+ <table  border="0s" style="width: 80%" >
+
+
+  <tr>
+
+<td align="right" style="width: 15%"> 
+<img src="{{STATIC_URL}}img/light.png" alt=" "> 
+
+</td>
+<td valign="top" style="width: 85%"> 
+
+  {% if random_feed %}
+  <p><h4> Did you know?</h4>
+
+    </>
+
+<ul>
+  
+
+<li>{{random_feed.feedback }} </li>
+ 
+
+ 
+  
+     
+                            </ul>
+                        {% else %}
+                            <p>No Data Available.</p>
+                        {% endif %} 
+
+
+
+
+
+</td>
+
+  </tr>
+
+ 
+</table>
+</td></tr>
+
+<tr>
+  <td><h5> Summery of Last 3 Diary Entries</h5>
+      {% if recent_three %}
+
+<ul>
+ {% for diary in recent_three %}
+<li>Date:  {{ diary.entry_date }}  </li>
+<li>Meal Of the Day:   {{ diary.meal_type }}</li>
+
+<li>Type of food Consumed: {{ diary.food_type_name }}</li>
+
+<li>Serving Size: {{ diary.serving_size }} Grams </li>
+
+<li>Estimated      <a href="#"  id="pop2{{forloop.counter}}" class="link " rel="popover" data-toggle="popover" data-placement="bottom" data-content=
+                        "A greenhouse gas (GHG) is a gas in an atmosphere that absorbs and emits radiation. This process is the fundamental cause of the greenhouse effect.  The primary greenhouse gases in the Earth's atmosphere are water vapor, carbon dioxide, methane, nitrous oxide, and ozone. Greenhouse gases greatly affect the temperature of the Earth .Since the beginning of the Industrial Revolution (taken as the year 1750), the burning of fossil fuels has contributed to a significant increase in the atmospheric concentration of carbon dioxide. (source: wikipidea)" 
+
+                        title="" data-original-title="Greenhouse Gas"> 
+                    
+
+                        GHG</a> Output: {{ diary.total }}    <a href="#"  id="pop{{forloop.counter}}" class="link " rel="popover" data-toggle="popover" data-placement="bottom" data-content=
+                        "Equivalent carbon dioxide (CO2e) is a measure for describing how much global warming a given type and amount of greenhouse gas may cause, using the functionally equivalent amount or concentration of carbon dioxide (CO2) as the reference. (source: wikipidea)" 
+
+                        title="" data-original-title="Equivalent carbon dioxide (CO2e)"> 
+                    
+
+                        CO<sub>2</sub>e*</a>
+
+
+                        </li>  </br>
+
+ 
+ {% endfor %}
+   *CO<sub>2</sub>e : Equivalent carbon dioxide</br>  *GHG : Green House Gas 
+                            </ul>
+                        {% else %}
+                            <p>No Data Available.</p>
+                        {% endif %} 
+
+
+
+
+
+
+
+
+
+  </td><td valign="top" style="width: 35%"> 
+
+
+    <h5> Last 15 Diary Entries </h5>
+
+
+
+                    {% if latest_diary_list %}
+                                 
+
+                            <ul>
+                            {% for diary in latest_diary_list %}
+                            <li>
+                               
+
+                                           <a href="{% url 'diary:detail' diary.id %}" > {{ diary.meal_type }} on {{ diary.entry_date }}</a>
+
+                    </li>
+
+
+
+
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No Diary entries Available.</p>
+                        {% endif %} </br>
+
+
+</td>
+</tr>
+ 
+</table>
+
+</div>
+         
+
+        </div>
+        <div class="tab-pane" id="orange">
+            <div align="center">
+<table  border="0" style="width: 85%" > <tr><td>
+<h5> Feedback Relating To Lastest Diary Entries </h5>
+
+   {% if recent_feedback %}
+
+<ul>
+ {% for diary in recent_feedback %}
+<li> {{ diary.feedback }}  </li>  </br>
+
+ 
+ {% endfor %}
+    
+                            </ul>
+                        {% else %}
+                            <p>No Data Available.</p>
+                        {% endif %} 
+
+ 
+</tr></td>
+
+ </table>
+
+</br>
+   *CO<sub>2</sub>e : Equivalent carbon dioxide</br>  *GHG : Green House Gas 
+
+</div>
+
+<div class="span3" hidden="hidden" >
+                                <div class="well" > <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+ 
+
+                         <p align="center">
+
+                                    <h5> 
+
+                                        Total GHG Emmissions for {{full_name}}
+                                    </h5>
+                             </p>
+                                  <p align="center">
+
+                                    <b> <i> 
+
+                                        {{row}}
+                                    </i>
+                                    </b>
+                             </p>
+
+                    </div></div>
+
+        </div>
+        <div class="tab-pane" id="yellow">
+            
+                                    <div class="span4"  >
+
+                                        <div class="well">
+                   
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+                <h5> <p align="center"> Chart for the share of top 5 Source's of GHG* emmisions for {{full_name}} </p></h5>
+
+
+                <div id="containe" align="center" style="min-width: 350px; height: 350px; margin: 0 auto"></div></div></div>
+
+
+                      <div class="span3"  >
+
+                                        <div class="well">
+  <div align="center">
+</br>
+
+
+     <h5> <p align="center">Top 5 Source's of <a href="#"  id="poptop" class="link " rel="popover" data-toggle="popover" data-placement="bottom" data-content=
+                        "A greenhouse gas (GHG) is a gas in an atmosphere that absorbs and emits radiation. This process is the fundamental cause of the greenhouse effect.  The primary greenhouse gases in the Earth's atmosphere are water vapor, carbon dioxide, methane, nitrous oxide, and ozone. Greenhouse gases greatly affect the temperature of the Earth .Since the beginning of the Industrial Revolution (taken as the year 1750), the burning of fossil fuels has contributed to a significant increase in the atmospheric concentration of carbon dioxide. (source: wikipidea)" 
+
+                        title="" data-original-title="Greenhouse Gas"> 
+                    
+
+                        GHG</a> emmisions for {{full_name}} </p></h5>
+ 
+ 
+                    <table id="datatable" border="1">
+    <thead>
+        <tr>
+            <th>Food Type</th>
+            <th>Emmisions</th>
+             
+        </tr>
+    </thead>
+    <tbody>
+
+                    {% if top_emmisions %}
+                     {% for diary in top_emmisions %}       
+        <tr>
+                                  <td>{{ diary.food_type_name }}</td>
+                                  <td>{{ diary.per_kg_emmision }}</td>
+
+        </tr>
+
+                            {% endfor %}
+                        {% else %}
+                            <p>No polls are available.</p>
+                        {% endif %}
+                     
+                                                
+
+
+    </tbody></table> *GHG = Green house Gas </div>
+
+                    </br>
+
+
+
+
+
+                     
+ 
+
+        </div> </div> </div>
+                <div class="tab-pane" id="purple"> 
+
+
+
+      <div class="row" align="center" >
+        <div class="span8"  >
+          <div class="well" >
+ 
+
+
+
+
+              <!--  Carousel -->
+      <!--  consult Bootstrap docs at 
+            http://twitter.github.com/bootstrap/javascript.html#carousel -->
+      <div id="this-carousel-id" class="carousel slide">
+        <div class="carousel-inner">
+
+        
+                                   
+
+         
+
+                      
+
+     
+ {% if image_list %}
+                     {% for diary in image_list %}       
+         
+          {% if forloop.counter == 1 %}
+
+             <div class="item active">
+                     
+                      <img src="{{STATIC_URL}}{{ diary.image }}" alt=" " height="600px"  width="800px" />
+                     
+                
+                  </div>
+
+                {% endif %}
+
+         
+
+          <div class="item">
+             
+              <img src="{{STATIC_URL}}{{ diary.image }} " alt=" " height="600px"  width="800px"/>
+            </a>
+       
+          </div>
+      
+            {% endfor %}
+                        {% else %}
+                            <p>No Pictures available.</p>
+                        {% endif %}
+                     
+     
+        </div> 
+        
+          <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+      </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+          </div>
+
+        
+      </div>
+
+
+
+
+
+
+
+
+                </div>
+
+        <div class="tab-pane" id="green"> 
+            <div align="center">
+
+
+
+
+
+
+
+            <h5> Users with Lowest average <a href="#"  id="poplow" class="link " rel="popover" data-toggle="popover" data-placement="bottom" data-content=
+                        "A greenhouse gas (GHG) is a gas in an atmosphere that absorbs and emits radiation. This process is the fundamental cause of the greenhouse effect.  The primary greenhouse gases in the Earth's atmosphere are water vapor, carbon dioxide, methane, nitrous oxide, and ozone. Greenhouse gases greatly affect the temperature of the Earth .Since the beginning of the Industrial Revolution (taken as the year 1750), the burning of fossil fuels has contributed to a significant increase in the atmospheric concentration of carbon dioxide. (source: wikipidea)" 
+
+                        title="" data-original-title="Greenhouse Gas"> 
+                    
+
+                        GHG</a> Emmisions (in  <a href="#"  id="poplowc" class="link " rel="popover" data-toggle="popover" data-placement="bottom" data-content=
+                        "Equivalent carbon dioxide (CO2e) is a measure for describing how much global warming a given type and amount of greenhouse gas may cause, using the functionally equivalent amount or concentration of carbon dioxide (CO2) as the reference. (source: wikipidea)" 
+
+                        title="" data-original-title="Equivalent carbon dioxide (CO2e)"> 
+                    
+
+                        CO<sub>2</sub>e*</a>)</h5></br>
+          <table id="datatable3" border="1" >
+    <thead>
+        <tr>
+            <th>User-Name</th>
+            <th>Average Emmisions</th>
+            <th>Total Emmisions</th>
+             <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+
+                    {% if all_user_diary_list %}
+                     {% for diary in all_user_diary_list %}     
+        <tr>
+
+
+                                  <td>{{ diary.username }}</td>
+                                  <td>{{ diary.avg }}</td>
+                                    <td>{{ diary.total }}</td> <td>
+                                            <p align="center">
+                                         <img src="{{STATIC_URL}}img/trophy{{forloop.counter}}.png" alt=" "> 
+                                    </br>
+                                        place = {{forloop.counter}}</p>
+                                </td>
+
+        </tr>
+
+                            {% endfor %}
+                        {% else %}
+                            <p>No Data available.</p>
+                        {% endif %}
+             
+
+
+
+                        
+                       
+    </tbody></table></br> 
+
+    <table id="datatable3.1" hidden="hidden" >
+    <thead>
+        <tr>
+            <th></th>
+            <th>Average Emmisions</th>
+            
+             
+        </tr>
+    </thead>
+    <tbody>
+
+                    {% if all_user_diary_list %}
+                     {% for diary in all_user_diary_list %}     
+        <tr>
+                                  <th>{{ diary.username }}</th>
+                                  <td>{{ diary.avg }}</td>
+
+        </tr>
+
+                            {% endfor %}
+                        {% else %}
+                            <p>No Data available.</p>
+                        {% endif %}
+             
+
+
+
+                        
+                        
+
+    </tbody></table>*GHG = Green house Gas 
+ </div> </br></br>
+
+ <div align="center">
+        <div id="contain3" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+ </div>
+
+       </div>
+        <div class="tab-pane" id="blue">
+              <div class="span7" >
+                   
+<div id="contain2" style="min-width: 700px; height: 400px; margin: 0 auto"></div>
+
+<table id="datatable2" hidden="hidden" >
+    <thead>
+        <tr>
+            <th></th>
+            <th>Emmisions</th>
+             
+        </tr>
+    </thead>
+    <tbody>
+
+                    {% if date_diary_list %}
+                     {% for diary in date_diary_list %}     
+        <tr>
+                                  <th>{{ diary.entry_date }}</th>
+                                  <td>{{ diary.total }}</td>
+
+        </tr>
+
+                            {% endfor %}
+                        {% else %}
+                            <p>No polls are available.</p>
+                        {% endif %}
+             
+
+
+
+                        
+ 
+    </tbody></table> 
+</div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+			
+
+
+			
+
+
+
+			</div>
+
+
+
+
+		
+
+
+
+
+
+		</div>
+
+
+
+
+     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        <script src="{{STATIC_URL}}js/bootstrap-popover.min.js"></script>
+            <script src="{{STATIC_URL}}js/bootstrap-tooltip"></script>
+        <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
+ <script src="{{STATIC_URL}}js/bootstrap-fileupload.min.js"></script>
+
+
+
+
+
+
+
+
+
+        <script>
+  $(function() {
+    $( "#dp3" ).datepicker();
+    $( "#dp4" ).datepicker();
+    $( "#pop1" ).popover();
+     $( "#pop2" ).popover();
+     $( "#pop3" ).popover();
+    $( "#pop21" ).popover();
+     $( "#pop22" ).popover();    
+    $( "#pop23" ).popover();
+     $( "#pop31" ).popover();
+     $( "#pop32" ).popover();
+    $( "#pop33" ).popover();
+     $( "#poptop" ).popover();
+     $( "#poplow" ).popover();
+     $( "#poplowc" ).popover();
+     $( "#pop13" ).popover();
+    $( "#pop14" ).popover();
+     $( "#pop15" ).popover();
+ 	  $("#first").collapse("hide");
+ 	   	  //$("#secondfirst").collapse("hide");
+
+
+
+ 	  jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+
+
+
+
+  });
+
+  </script>
+<script>
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+        
+        // Build the chart
+        $('#containe').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+
+                type: 'pie',
+                                    name: 'Share of Emmissions',
+                                    data: [
+
+ {% if top_emmisions %}
+                     {% for diary in top_emmisions %}       
+        
+                                  
+                                
+
+                             
+                                        [' {{ diary.food_type_name }} ',  {{ diary.per_kg_emmision }} ],
+                                       
+
+
+                            {% endfor %}
+                        {% else %}
+                              [' No Entries made',  100 ],
+                        {% endif %}
+
+               
+
+
+
+                ]
+            }]
+        });
+    });
+    
+});
+        </script>
+
+
+
+    
+            <script type="text/javascript">
+$(function () {
+    $('#contain2').highcharts({
+        data: {
+            table: document.getElementById('datatable2')
+        },
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Graph showing the history of your food related emmisions '
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'CO2e'
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.y +' '+ this.x.toLowerCase();
+            }
+        }
+    });
+});
+        </script>
+
+        <script type="text/javascript">
+$(function () {
+    $('#contain3').highcharts({
+        data: {
+            table: document.getElementById('datatable3.1')
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Users with Lowest GHG emmisions'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.y +' '+ this.x.toLowerCase();
+            }
+        }
+    });
+});
+        </script>
+
+  </body>
+</html>

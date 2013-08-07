@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+
+	</head>
+	<body>
+				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script src="{{STATIC_URL}}js/highcharts.js"></script>
+<script src="{{STATIC_URL}}js/modules/data.js"></script>
+<script src="{{STATIC_URL}}js/modules/exporting.js"></script>
+
+<div id="contain2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<table id="datatable2" >
+	<thead>
+		<tr>
+			<th></th>
+			<th>Emmisions</th>
+			 
+		</tr>
+	</thead>
+	<tbody>
+
+					{% if date_diary_list %}
+					 {% for diary in date_diary_list %}		
+		<tr>
+								  <th>{{ diary.entry_date }}</th>
+								  <td>{{ diary.total }}</td>
+
+		</tr>
+
+						    {% endfor %}
+ 						{% else %}
+						    <p>No polls are available.</p>
+						{% endif %}
+			 
+
+
+
+						
+						*GHG = Green house Gas 
+
+	</tbody></table>
+
+
+
+<div class="well" >
+				<h5> <p align="center"> 5 Food types Consumed by {{full_name}} with highest GHG* emmisions<p></h5>
+
+ 
+
+
+
+
+
+
+<table id="datatable3" >
+	<thead>
+		<tr>
+		  <td>User-Name</td>
+			<th>Average Emmisions</th>
+			
+			 
+		</tr>
+	</thead>
+	<tbody>
+
+					{% if all_user_diary_list %}
+					 {% for diary in all_user_diary_list %}		
+		<tr>
+								  <th>{{ diary.username }}</th>
+								  <td>{{ diary.avg }}</td>
+
+		</tr>
+
+						    {% endfor %}
+ 						{% else %}
+						    <p>No polls are available.</p>
+						{% endif %}
+			 
+
+
+
+						
+						*GHG = Green house Gas 
+
+	</tbody></table>
+
+
+
+
+
+
+					</div>
+
+
+					     {% if recent_feedback %}
+
+<ul>
+ {% for diary in recent_feedback %}
+<li> {{ diary.feedback }}  </li>  </br>
+
+ 
+ {% endfor %}
+    
+                            </ul>
+                        {% else %}
+                            <p>No Data Available.</p>
+                        {% endif %} 
+
+
+<
+
+
+<div id="contain3" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+	
+			<script type="text/javascript">
+$(function () {
+    $('#contain2').highcharts({
+        data: {
+            table: document.getElementById('datatable2')
+        },
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Data extracted from a HTML table in the page'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.y +' '+ this.x.toLowerCase();
+            }
+        }
+    });
+});
+		</script>
+
+
+			<script type="text/javascript">
+$(function () {
+    $('#contain3').highcharts({
+        data: {
+            table: document.getElementById('datatable3')
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Data extracted from a HTML table in the page'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.y +' '+ this.x.toLowerCase();
+            }
+        }
+    });
+});
+		</script>
+	
+	
+	
+	
+</table>
+	</body>
+</html>

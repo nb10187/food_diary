@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+   <div class="container">
+
+   	<!-- start of header****************************************************************************-->
+
+			<header class="row">
+
+				<div class="span12"> 
+					<nav class="navbar aria-hidden="true">
+						<div class="navbar-inner"> 
+
+							<a href="#" class="brand"> Food Diary App</a>
+				
+						</div>
+
+						</div>
+
+					</nav>
+
+				</div>
+
+			</header>
+			<!-- end of header****************************************************************************-->
+
+			<div class="row" id="main-content">
+				<div class="span5"></div>
+				<div class="span4" id="sidebar">
+					<div class="well" >
+
+						<form action="auth_view/" method="post">
+							 {% csrf_token %}
+														<fieldset>
+								<legend>Login</legend>
+								<input type="text"  class="input-block-level"  placeholder="username" name="username" id="username">
+
+								<input type="text" class="input-block-level" placeholder="password"  name="password" id="password">
+
+								<div class="pull-right">
+								<input type="submit" class="btn btn-primary" value="Login">
+
+								 <a class="btn btn-info" href="#register" role="button" data-toggle="modal">Register</a>
+								</div>
+							</fieldset>
+
+						</form>
+
+					</div>
+					</div>
+
+				<div class="span8">
+
+				</div>
+			</div>
+
+
+			<footer class="row"></footer>
+		</div>
+					<!-- end of cpntainer****************************************************************************-->
+
+		<div id="register" class="modal hide fade"  aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><i class="icon-remove"></i></button>
+					<h3 id="modalLabel"> Register</h3>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="controls controls-row">
+							
+								<input type="text"  class="span3"  placeholder="First Name">
+								<input type="text"  class="span2"  placeholder="Last Name">
+								</div> 
+								<input type="text"  class="span3 pull-left"  placeholder="username">
+								<input type="text" class="span3 pull-left" placeholder="password">
+								<input type="text"  class="span3 pull-left"  placeholder="Diet Type">								
+
+
+
+					
+
+				</form>
+
+
+			</div>
+			<div class="modal-footer">
+
+				<button   class="btn btn-danger" data-dismiss="modal" aria-hidden="true" >cancel </button>
+				<button   class="btn btn-success" > Register </button>
+
+			</div>
+
+
+		</div>
+
+
+       <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+  </body>
+</html>
