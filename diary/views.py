@@ -18,18 +18,7 @@ from django.views import generic
 
 
 def index(request):
-    cursor = connection.cursor()
-    cursor.execute('SELECT SUM( f.per_kg_emmision ) AS total FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id AND d.user_id = %s', request.user.id)
-    row = cursor.fetchone()
-    # = Diary_entry.objects.all().order_by('-entry_date')[:5]
-    recent_feedback = Diary_entry.objects.raw('SELECT DISTINCT d.id, f.feedback  FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id AND d.user_id = %s GROUP BY d.food_type_id ORDER BY  d.id DESC LIMIT 0 , 5' , [ request.user.id] )
-    recent_three = ('SELECT d.id, d.entry_date,( f.per_kg_emmision * d.serving_size ) AS total,d.meal_type, f.food_type_name, d.serving_size, f.per_kg_emmision FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id AND d.user_id = %s  ORDER BY  d.id DESC LIMIT 0 , 3' , [ request.user.id] )
-    date_diary_list = Diary_entry.objects.raw('SELECT DISTINCT d.id, d.entry_date, SUM( f.per_kg_emmision ) AS total FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id AND d.user_id = %s GROUP BY d.entry_date ORDER BY  d.entry_date LIMIT 0 , 10' , [ request.user.id] )
-    all_user_diary_list = Diary_entry.objects.raw('SELECT DISTINCT u.id AS id, u.username, AVG( f.per_kg_emmision ) AS avg, SUM( f.per_kg_emmision ) AS total FROM diary_diary_entry d, diary_food_type f, auth_user u WHERE d.food_type_id = f.id AND d.user_id = u.id GROUP BY d.user_id ORDER BY avg ASC LIMIT 0 , 10')
-    latest_diary_list = Diary_entry.objects.raw('SELECT DISTINCT * FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id and d.user_id = %s GROUP BY f.food_type_name ORDER BY f.per_kg_emmision DESC LIMIT 0 , 5' , [ request.user.id] )
-
-    context = {'recent_three':recent_three,'latest_diary_list': latest_diary_list,'date_diary_list': date_diary_list,'full_name' : request.user.username, 'row': row, 'all_user_diary_list':all_user_diary_list, 'recent_feedback':recent_feedback,}
-    return render(request, 'diary/index.html', context)	
+    return HttpResponseRedirect('/foody/accounts/register_success')	
 	
 	
 	
@@ -118,7 +107,7 @@ def auth_view(request):
      return HttpResponseRedirect('/accounts/invalid')
 	 
 def loggedin(request):
-    return render_to_response('foody/loggedin.html', {'full_name' : request.user.username})
+    return render_to_response('diary/loggedin.html', {'full_name' : request.user.username})
 
 def invalid_login(request):
     return render_to_response('invalid_login.html')
@@ -139,19 +128,19 @@ def login(request):
 
     args['form'] = UserCreationForm()
     print args
-    return render_to_response('foody/login.html', args, context_instance = RequestContext(request))
+    return render_to_response('diary/login.html', args, context_instance = RequestContext(request))
 	
 def gallery(request):
 #
     image_list = Diary_entry.objects.raw('SELECT id, image FROM diary_diary_entry WHERE image <>  "" AND user_id = %s LIMIT 0 , 20' , [ request.user.id] )
-    return render_to_response('foody/gallery.html',{'full_name' : request.user.username, 'image_list':image_list } ,context_instance = RequestContext(request))
+    return render_to_response('diary/gallery.html',{'full_name' : request.user.username, 'image_list':image_list } ,context_instance = RequestContext(request))
 	
 def history(request):
 #
     q1 = Diary_entry.objects.all().order_by('-entry_date')
     full_list = q1.filter(user=request.user)
     #full_list = Diary_entry.objects.raw('SELECT id, image FROM diary_diary_entry WHERE image <>  "" AND user_id = %s LIMIT 0 , 20' , [ request.user.id] )
-    return render_to_response('foody/history.html',{'full_name' : request.user.username, 'full_list':full_list } ,context_instance = RequestContext(request))
+    return render_to_response('diary/history.html',{'full_name' : request.user.username, 'full_list':full_list } ,context_instance = RequestContext(request))
 	
 class DetailView(generic.DetailView):
     model = Diary_entry
