@@ -18,7 +18,7 @@ from django.views import generic
 
 
 def index(request):
-    return HttpResponseRedirect('foody/accounts/login/')	
+    return HttpResponseRedirect('/accounts/login/')	
 	
 	
 	
