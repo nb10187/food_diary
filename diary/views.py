@@ -29,8 +29,8 @@ def detail(request, diary_entry_id):
     s3 = s3 +s2
     the_request = Diary_entry.objects.raw(s3)
     #the_request = 'test'
-
-    return render_to_response('diary/viewDetail.html',{'full_name' : request.user.username , 'the_request':the_request } ,context_instance = RequestContext(request))
+#viewdetail.html
+    return render_to_response('diary/viewdetail.html',{'full_name' : request.user.username , 'the_request':the_request } ,context_instance = RequestContext(request))
 
 def results(request, diary_entry_id):
     return HttpResponse("You're looking at the results of poll %s." % diary_entry_id)
