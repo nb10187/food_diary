@@ -53,12 +53,10 @@
 
 
 								<li  class="divider-vertical"> </li>
-								<li> <a href="/diary/create">Home</a></li>
-								<li  class="divider-vertical"> </li>
-								<li> <a href="/diary/gallery">Gallery</a></li>
+								<li> <a href="/foody/create">Home</a></li> 
 								<li  class="divider-vertical"> </li>
 						 
-                                <li> <a href="/diary/history">Complete History</a></li>
+                                <li> <a href="/foody/history">Complete History</a></li>
 								<li  class="divider-vertical"> </li>
 
 
@@ -102,7 +100,7 @@
                             <li>
                                
 
-                        <a href="{% url 'foody:detail' diary.id %}" > {{ diary.meal_type }} on {{ diary.entry_date }}</a>
+                        <a href="/foody/{{diary.id}}"  > {{ diary.meal_type }} on {{ diary.entry_date }}</a>
                     </li>
 
 
