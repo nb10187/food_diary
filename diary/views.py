@@ -104,7 +104,7 @@ def auth_view(request):
      auth.login(request, user)
      return HttpResponseRedirect('/foody/create')
     else:
-     return HttpResponseRedirect('/accounts/invalid')
+     return HttpResponseRedirect('/foody/accounts/invalid')
 	 
 def loggedin(request):
     return render_to_response('diary/loggedin.html', {'full_name' : request.user.username})
