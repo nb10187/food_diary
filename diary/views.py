@@ -110,7 +110,7 @@ def loggedin(request):
     return render_to_response('diary/loggedin.html', {'full_name' : request.user.username})
 
 def invalid_login(request):
-    return render_to_response('invalid_login.html')
+    return HttpResponse("You Login is INVALID, please Go back and re-try")
 	
 def logout(request):
     auth.logout(request)
