@@ -147,4 +147,4 @@ class DetailView(generic.DetailView):
     template_name = 'foody/deatil.html'
 	
 def register_success(request):
-    return render_to_response('foody/register_success.html')
+    return HttpResponse("You have Registered Sucessfully, please go back to login")
