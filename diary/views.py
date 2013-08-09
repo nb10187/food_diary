@@ -25,7 +25,7 @@ def index(request):
 def detail(request, diary_entry_id):
     s1='AND d.user_id = %s ' % request.user.id
     s2=' AND d.id = %s' % diary_entry_id
-    s3='SELECT d.id, d.entry_date,( f.per_kg_emmision * d.serving_size ) AS total,d.meal_type, f.food_type_name,d.additional_info, d.serving_size, f.per_kg_emmision FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id %s ' % s1
+    s3='SELECT d.id, d.entry_date,( f.per_kg_emmision * d.serving_size ) AS total,d.meal_type, f.food_type_name,d.additional_info, (d.serving_size*1000) as serving_size , f.per_kg_emmision FROM diary_diary_entry d, diary_food_type f WHERE d.food_type_id = f.id %s ' % s1
     s3 = s3 +s2
     the_request = Diary_entry.objects.raw(s3)
     #the_request = 'test'
